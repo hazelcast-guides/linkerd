@@ -210,7 +210,7 @@ When you list the services used, you will see that you have two Kubernetes Servi
 $ kubectl get svc
 NAME                          TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
 hazelcast-embedded-headless   ClusterIP   None           <none>        5701/TCP   9s
-kubernetes                    ClusterIP   10.19.240.1    <none>        443/TCP    73m
+kubernetes                    ClusterIP   10.19.241.1    <none>        443/TCP    73m
 springboot-service            ClusterIP   10.19.252.76   <none>        80/TCP     9s
 ----
 
