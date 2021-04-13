@@ -17,7 +17,7 @@ In this guide, a Google Kubernetes Engine is used but you can use any Kubernetes
 gcloud container clusters create hazelcast-cluster --num-nodes=4
 ----
 
-=== Linkerd 2.10
+=== Linkerd
 This code sample has been tested against Linkerd 2.10
 
 ****
@@ -25,7 +25,7 @@ This code sample has been tested against Linkerd 2.10
 Firstly, let's download Linkerd CLI and configure the path for `linkerd`. Remember to replace [USER_HOME] with your user home directory path:
 ----
 curl -sL run.linkerd.io/install | sh
-export PATH=$PATH:[USER_HOME]/.linkerd2/bin
+export PATH=$PATH:$HOME/.linkerd2/bin
 ----
 
 Once installed, verify the CLI is running correctly with:
@@ -65,7 +65,7 @@ Clone this repository and apply RBAC. RBAC is needed by https://github.com/hazel
 ----
 git clone https://github.com/hazelcast-guides/linkerd.git
 cd linkerd
-kubectl apply -f rbac.yaml
+kubectl apply -f https://raw.githubusercontent.com/hazelcast/hazelcast-kubernetes/master/rbac.yaml
 ----
 
 Linkerd automatically adds the data plane proxy to pods when the `linkerd.io/inject: enabled` annotation is present on a namespace or any workloads, such as deployments or pods. If you want to implement manual injection with the deployments then you need to use `linkerd inject`.
@@ -128,30 +128,29 @@ Members [3] {
 ...
 ----
 
-Let's now run a container with curl installed and set an environment variable to point to Spring Load Balancer.
+Let's now run a container with curl installed and use it to make requests to the `springboot-service`.
 
-First, find the IP of Spring Boot Service:
+First, observe the Spring Boot Service is up and running:
 ----
 $ kubectl get svc springboot-service
 NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
 springboot-service   ClusterIP   10.19.250.127   <none>        80/TCP    3m29s
 ----
 
-Launch a `curl` container inside Kubernetes cluster and set the service IP as an environment variable:
+Launch a `curl` container inside Kubernetes cluster:
 ----
 kubectl run curl --rm --image=radial/busyboxplus:curl -i --tty
-SPRINGBOOT_SERVICE=10.19.250.127
 ----
 
-Put a value to the cluster:
+Put a value to the cluster using the service name:
 ----
-$ curl "${SPRINGBOOT_SERVICE}/put?key=1&value=2"
+$ curl "springboot-service/put?key=1&value=2"
 {"value":"2","podName":"hazelcast-client-2"}
 ----
 
 Get the value from cluster in a loop and see that it is retrieved from different Pod names:
 ----
-$ while true; do curl "${SPRINGBOOT_SERVICE}/get?key=1"; sleep 2;echo; done
+$ while true; do curl "springboot-service/get?key=1"; sleep 2;echo; done
 {"value":"2","podName":"hazelcast-client-1"}
 {"value":"2","podName":"hazelcast-client-0"}
 ...
