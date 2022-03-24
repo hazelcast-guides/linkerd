@@ -1,18 +1,20 @@
-:github-address: https://github.com/hazelcast-guides/linkerd.git
-:templates-url: templates:ROOT:page$/
-
 = Hazelcast with Linkerd Service Mesh
-
-include::{templates-url}/link-to-repo.adoc[]
+:templates-url: templates:ROOT:page$/
+:page-layout: tutorial
+:page-product: imdg
+:page-categories: Deployment, Kubernetes
+:page-lang: java
+:page-est-time: 20 mins
+:description: This tutorial explains how to use Hazelcast in the Linkerd environment. You'll learn how to set up a Hazelcast cluster and connect a Hazelcast client to it. Then, you will also see how to deploy an application with embedded Hazelcast.
 
 == What You’ll Learn
 
-This guide explains how to use Hazelcast in the Linkerd environment. You'll learn how to set up a Hazelcast cluster and connect it with Hazelcast client. Then, you will also see how to deploy an application with embedded Hazelcast.
+{description}
 
-== Prerequisites
+== Before you Begin
 
 === Kubernetes Cluster
-In this guide, a Google Kubernetes Engine is used but you can use any Kubernetes cluster you choose.
+In this tutorial, a Google Kubernetes Engine is used but you can use any Kubernetes cluster you choose.
 ----
 gcloud container clusters create hazelcast-cluster --num-nodes=4
 ----
@@ -242,4 +244,4 @@ kubectl delete -f hazelcast-embedded.yaml
 
 == Summary
 
-This guide demonstrates how to use Hazelcast Embedded and Client-Server topology in Linkerd environment with Automatic Sidecar Injection. Hazelcast continuously tries to support cloud native technologies and verifies those environments as they evolve.
+This tutorial demonstrates how to use Hazelcast Embedded and client/server topology in Linkerd environment with Automatic Sidecar Injection. Hazelcast continuously tries to support cloud native technologies and verifies those environments as they evolve.
