@@ -2,14 +2,14 @@
 :templates-url: templates:ROOT:page$/
 :page-layout: tutorial
 :page-product: imdg
-:page-categories: Deployment, Kubernetes
+:page-categories: Deployment, Cloud Native
 :page-lang: java
 :page-est-time: 20 mins
-:description: This tutorial explains how to use Hazelcast in the Linkerd environment. You'll learn how to set up a Hazelcast cluster and connect a Hazelcast client to it. Then, you will also see how to deploy an application with embedded Hazelcast.
+:description: Use Hazelcast in a Linkerd environment. 
 
-== What You’ll Learn
+== Context
 
-{description}
+You'll learn how to set up a Hazelcast cluster and connect a Hazelcast client to it. Then, you will also see how to deploy an application with embedded Hazelcast.
 
 == Before you Begin
 
